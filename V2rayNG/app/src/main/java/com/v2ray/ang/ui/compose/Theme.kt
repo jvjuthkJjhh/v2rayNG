@@ -27,107 +27,115 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
+// ═══════════════════════════════════════════
+// Pars VIP - Light Colors (نئونی روشن)
+// ═══════════════════════════════════════════
 private val LightColor = lightColorScheme(
-    primary = Color(0xFF000000), // Black
-    onPrimary = Color(0xFFFFFFFF), // White
-    primaryContainer = Color(0xFFE0E0E0), // Light Gray
-    onPrimaryContainer = Color(0xFF000000), // Black
-    secondary = Color(0xFFf97910), // Orange
-    onSecondary = Color(0xFFFFFFFF), // White
-    secondaryContainer = Color(0xFFFFE8D6), // Pale Orange
-    onSecondaryContainer = Color(0xFF2B1700), // Dark Brown
-    tertiary = Color(0xFF009966), // Green
-    onTertiary = Color(0xFFFFFFFF), // White
-    tertiaryContainer = Color(0xFFA0F2D0), // Light Green
-    onTertiaryContainer = Color(0xFF00201A), // Dark Teal
-    error = Color(0xFFBA1A1A), // Red
-    errorContainer = Color(0xFFFFDAD6), // Light Red
-    onError = Color(0xFFFFFFFF), // White
-    onErrorContainer = Color(0xFF410002), // Dark Red
-    background = Color(0xFFFFFFFF), // White
-    onBackground = Color(0xFF1C1B1F), // Near Black
-    surface = Color(0xFFFFFFFF), // White
-    onSurface = Color(0xFF1C1B1F), // Near Black
-    surfaceVariant = Color(0xFFE7E0EC), // Light Purple Gray
-    onSurfaceVariant = Color(0xFF49454F), // Dark Gray
-    outline = Color(0xFF79747E), // Medium Gray
-    outlineVariant = Color(0xFFCAC4D0), // Light Gray
-    inverseSurface = Color(0xFF313033), // Dark Gray
-    inverseOnSurface = Color(0xFFF4EFF4), // Very Light Gray
-    inversePrimary = Color(0xFFC0C0C0), // Silver Gray
-    scrim = Color(0xFF000000), // Black
-    surfaceTint = Color(0xFF000000), // Black
-    surfaceContainerLowest = Color(0xFFFFFFFF), // White
-    surfaceContainerLow = Color(0xFFF7F7F7), // Very Light Gray
-    surfaceContainer = Color(0xFFF1F1F1), // Light Gray
-    surfaceContainerHigh = Color(0xFFEBEBEB), // Light Gray
-    surfaceContainerHighest = Color(0xFFE5E5E5), // Light Gray
+    primary = Color(0xFF00FFEA),                 // Neon Cyan
+    onPrimary = Color(0xFF000000),               // Black
+    primaryContainer = Color(0xFF003333),        // Dark Cyan
+    onPrimaryContainer = Color(0xFF00FFEA),      // Neon Cyan
+    secondary = Color(0xFF00FF88),               // Neon Green
+    onSecondary = Color(0xFF000000),             // Black
+    secondaryContainer = Color(0xFF003322),      // Dark Green
+    onSecondaryContainer = Color(0xFF00FF88),    // Neon Green
+    tertiary = Color(0xFFFF00AA),                // Neon Pink
+    onTertiary = Color(0xFFFFFFFF),              // White
+    tertiaryContainer = Color(0xFF330022),       // Dark Pink
+    onTertiaryContainer = Color(0xFFFF00AA),     // Neon Pink
+    error = Color(0xFFFF3366),                   // Neon Red
+    errorContainer = Color(0xFF330011),          // Dark Red
+    onError = Color(0xFFFFFFFF),                 // White
+    onErrorContainer = Color(0xFFFF3366),        // Neon Red
+    background = Color(0xFF0A0A0A),              // Near Black
+    onBackground = Color(0xFFFFFFFF),            // White
+    surface = Color(0xFF141414),                 // Dark Surface
+    onSurface = Color(0xFFFFFFFF),               // White
+    surfaceVariant = Color(0xFF1A1A1A),          // Card Dark
+    onSurfaceVariant = Color(0xFFAAAAAA),        // Light Gray
+    outline = Color(0xFF00FFEA),                 // Neon Cyan
+    outlineVariant = Color(0xFF333333),          // Dark Gray
+    inverseSurface = Color(0xFFE6E1E5),          // Light
+    inverseOnSurface = Color(0xFF1C1B1F),        // Near Black
+    inversePrimary = Color(0xFF00FFEA),          // Neon Cyan
+    scrim = Color(0xFF000000),                   // Black
+    surfaceTint = Color(0xFF00FFEA),             // Neon Cyan
+    surfaceContainerLowest = Color(0xFF000000),  // Pure Black
+    surfaceContainerLow = Color(0xFF0A0A0A),     // Near Black
+    surfaceContainer = Color(0xFF141414),        // Dark Surface
+    surfaceContainerHigh = Color(0xFF1A1A1A),    // Card Dark
+    surfaceContainerHighest = Color(0xFF222222), // Lighter Dark
 )
 
+// ═══════════════════════════════════════════
+// Pars VIP - Dark Colors (نئونی مشکی - اصلی)
+// ═══════════════════════════════════════════
 private val DarkColor = darkColorScheme(
-    primary = Color(0xFFC0C0C0), // Silver Gray
-    onPrimary = Color(0xFF303030), // Dark Gray
-    primaryContainer = Color(0xFF474747), // Gray
-    onPrimaryContainer = Color(0xFFE0E0E0), // Light Gray
-    secondary = Color(0xFFf97910), // Orange
-    onSecondary = Color(0xFF4E2600), // Dark Brown
-    secondaryContainer = Color(0xFF6F3800), // Brown
-    onSecondaryContainer = Color(0xFFFFE8D6), // Pale Orange
-    tertiary = Color(0xFF83D6B5), // Mint Green
-    onTertiary = Color(0xFF00382E), // Dark Teal
-    tertiaryContainer = Color(0xFF005143), // Teal
-    onTertiaryContainer = Color(0xFFA0F2D0), // Light Green
-    error = Color(0xFFFFB4AB), // Light Red
-    errorContainer = Color(0xFF93000A), // Dark Red
-    onError = Color(0xFF690005), // Deep Red
-    onErrorContainer = Color(0xFFFFDAD6), // Light Red
-    background = Color(0xFF1C1B1F), // Near Black
-    onBackground = Color(0xFFE6E1E5), // Light Gray
-    surface = Color(0xFF1C1B1F), // Near Black
-    onSurface = Color(0xFFE6E1E5), // Light Gray
-    surfaceVariant = Color(0xFF49454F), // Dark Gray
-    onSurfaceVariant = Color(0xFFCAC4D0), // Light Gray
-    outline = Color(0xFF938F99), // Grayish Purple
-    outlineVariant = Color(0xFF49454F), // Dark Gray
-    inverseSurface = Color(0xFFE6E1E5), // Light Gray
-    inverseOnSurface = Color(0xFF1C1B1F), // Near Black
-    inversePrimary = Color(0xFF000000), // Black
-    scrim = Color(0xFF000000), // Black
-    surfaceTint = Color(0xFFC0C0C0), // Silver Gray
-    surfaceContainerLowest = Color(0xFF0F0F12), // Near Black
-    surfaceContainerLow = Color(0xFF1A191D), // Dark Gray
-    surfaceContainer = Color(0xFF1E1D21), // Dark Gray
-    surfaceContainerHigh = Color(0xFF282729), // Dark Gray
-    surfaceContainerHighest = Color(0xFF333234), // Dark Gray
+    primary = Color(0xFF00FFEA),                 // Neon Cyan
+    onPrimary = Color(0xFF000000),               // Black
+    primaryContainer = Color(0xFF003333),        // Dark Cyan
+    onPrimaryContainer = Color(0xFF00FFEA),      // Neon Cyan
+    secondary = Color(0xFF00FF88),               // Neon Green
+    onSecondary = Color(0xFF000000),             // Black
+    secondaryContainer = Color(0xFF003322),      // Dark Green
+    onSecondaryContainer = Color(0xFF00FF88),    // Neon Green
+    tertiary = Color(0xFFFF00AA),                // Neon Pink
+    onTertiary = Color(0xFFFFFFFF),              // White
+    tertiaryContainer = Color(0xFF330022),       // Dark Pink
+    onTertiaryContainer = Color(0xFFFF00AA),     // Neon Pink
+    error = Color(0xFFFF3366),                   // Neon Red
+    errorContainer = Color(0xFF330011),          // Dark Red
+    onError = Color(0xFFFFFFFF),                 // White
+    onErrorContainer = Color(0xFFFF3366),        // Neon Red
+    background = Color(0xFF0A0A0A),              // Near Black
+    onBackground = Color(0xFFFFFFFF),            // White
+    surface = Color(0xFF141414),                 // Dark Surface
+    onSurface = Color(0xFFFFFFFF),               // White
+    surfaceVariant = Color(0xFF1A1A1A),          // Card Dark
+    onSurfaceVariant = Color(0xFFAAAAAA),        // Light Gray
+    outline = Color(0xFF00FFEA),                 // Neon Cyan
+    outlineVariant = Color(0xFF333333),          // Dark Gray
+    inverseSurface = Color(0xFFE6E1E5),          // Light
+    inverseOnSurface = Color(0xFF1C1B1F),        // Near Black
+    inversePrimary = Color(0xFF00FFEA),          // Neon Cyan
+    scrim = Color(0xFF000000),                   // Black
+    surfaceTint = Color(0xFF00FFEA),             // Neon Cyan
+    surfaceContainerLowest = Color(0xFF000000),  // Pure Black
+    surfaceContainerLow = Color(0xFF0A0A0A),     // Near Black
+    surfaceContainer = Color(0xFF141414),        // Dark Surface
+    surfaceContainerHigh = Color(0xFF1A1A1A),    // Card Dark
+    surfaceContainerHighest = Color(0xFF222222), // Lighter Dark
 )
 
-// Semantic Colors
-val colorPing = Color(0xFF009966) // Green
-val colorPingRed = Color(0xFFFF0099) // Pink Red
-val colorConfigType = Color(0xFFf97910) // Orange
-val colorFabActive = Color(0xFFf97910) // Orange
-val colorFabInactiveLight = Color(0xFF9C9C9C) // Gray
-val colorFabInactiveDark = Color(0xFF646464) // Dark Gray
-val dividerColorLight = Color(0xFFE0E0E0) // Light Gray
-val dividerColorDark = Color(0xFF424242) // Dark Gray
+// ═══════════════════════════════════════════
+// Semantic Colors - Pars VIP
+// ═══════════════════════════════════════════
+val colorPing = Color(0xFF00FF88)               // Neon Green
+val colorPingRed = Color(0xFFFF3366)            // Neon Red
+val colorConfigType = Color(0xFFFF00AA)         // Neon Pink
+val colorFabActive = Color(0xFF00FF88)          // Neon Green (دکمه فعال)
+val colorFabInactiveLight = Color(0xFFFF3366)   // Neon Red
+val colorFabInactiveDark = Color(0xFFFF3366)    // Neon Red
+val dividerColorLight = Color(0xFF1A1A1A)       // Dark
+val dividerColorDark = Color(0xFF1A1A1A)        // Dark
 
-// Toast Colors 70%
-val toastNormalBgLight = Color(0xB3353A3E) // Dark Gray
-val toastNormalBgDark = Color(0xB34A4F54) // Darker Gray
-val toastSuccessBg = Color(0xB3388E3C) // Green
-val toastErrorBg = Color(0xB3D50000) // Red
-val toastInfoBg = Color(0xB33F51B5) // Indigo Blue
-val toastIconCircleBg = Color(0x33FFFFFF) // Semi-transparent White
-val toastTextColor = Color.White // White
+// Toast Colors 70% - Pars VIP
+val toastNormalBgLight = Color(0xB31A1A1A)      // Dark Card
+val toastNormalBgDark = Color(0xB31A1A1A)       // Dark Card
+val toastSuccessBg = Color(0xB300FF88)          // Neon Green
+val toastErrorBg = Color(0xB3FF3366)            // Neon Red
+val toastInfoBg = Color(0xB300FFEA)             // Neon Cyan
+val toastIconCircleBg = Color(0x3300FFEA)       // Semi-transparent Cyan
+val toastTextColor = Color(0xFFFFFFFF)          // White
 
 object ThemeManager {
     private val _themeMode = MutableStateFlow(
-        MmkvManager.decodeSettingsString(AppConfig.PREF_UI_MODE_NIGHT, "0") ?: "0"
+        MmkvManager.decodeSettingsString(AppConfig.PREF_UI_MODE_NIGHT, "2") ?: "2"
     )
     val themeMode: StateFlow<String> = _themeMode.asStateFlow()
 
     private val _dynamicColorEnabled = MutableStateFlow(
-        MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, true)
+        MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, false)
     )
     val dynamicColorEnabled: StateFlow<Boolean> = _dynamicColorEnabled.asStateFlow()
 
@@ -143,9 +151,9 @@ object ThemeManager {
 
     fun refresh() {
         _themeMode.value =
-            MmkvManager.decodeSettingsString(AppConfig.PREF_UI_MODE_NIGHT, "0") ?: "0"
+            MmkvManager.decodeSettingsString(AppConfig.PREF_UI_MODE_NIGHT, "2") ?: "2"
         _dynamicColorEnabled.value =
-            MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, true)
+            MmkvManager.decodeSettingsBool(AppConfig.PREF_DYNAMIC_COLOR, false)
     }
 }
 
@@ -184,8 +192,8 @@ fun AppTheme(
             val activity = view.context as? Activity ?: return@SideEffect
             val window = activity.window
             WindowCompat.getInsetsController(window, view).apply {
-                isAppearanceLightStatusBars = !darkTheme
-                isAppearanceLightNavigationBars = !darkTheme
+                isAppearanceLightStatusBars = false  // همیشه متن روشن در نوار وضعیت
+                isAppearanceLightNavigationBars = false
             }
         }
     }
