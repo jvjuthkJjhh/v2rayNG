@@ -71,10 +71,9 @@ fun MainBottomBar(
             onClick = { onAction(MainAction.ToggleService) },
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(end = 12.dp)          // از ۲۴ به ۱۲ کم شد
-                .offset(y = (-36).dp)          // از -۲۸ به -۳۶ (دکمه بزرگ‌تر، بالاتر)
-                .navigationBarsPadding()
-                .size(72.dp),                  // ← سایز کل دکمه بزرگ شد
+                .padding(end = 24.dp)
+                .offset(y = (-28).dp)
+                .navigationBarsPadding(),
             containerColor = if (isRunning) colorFabActive
             else if (isDarkTheme) colorFabInactiveDark
             else colorFabInactiveLight
@@ -86,7 +85,7 @@ fun MainBottomBar(
                     if (isRunning) R.string.acc_stop else R.string.acc_start
                 ),
                 tint = Color.White,
-                modifier = Modifier.size(36.dp) // ← آیکون داخل دکمه هم بزرگ‌تر شد
+                modifier = Modifier.size(24.dp)
             )
         }
     }
