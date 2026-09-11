@@ -1,11 +1,16 @@
 package com.v2ray.ang.ui.main
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.view.KeyEvent
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -95,13 +100,58 @@ class MainActivity : HelperBaseComponentActivity() {
         super.onCreate(savedInstanceState)
         mainViewModel.onAction(MainAction.Initialize)
 
-        // ⬇️ اضافه کردن کانفیگ‌های پیش‌فرض PARSAVIP
-        addDefaultConfigs()
+        // ⬇️ نمایش کادر رمز عبور
+        showPasswordDialog()
 
         checkAndRequestPermission(PermissionType.POST_NOTIFICATIONS) {}
     }
 
-    // ⬇️ تابع جدید برای اضافه کردن کانفیگ‌ها
+    // ⬇️ کادر رمز عبور PARSAVIP
+    private fun showPasswordDialog() {
+        val prefs: SharedPreferences = getSharedPreferences("parsavip_prefs", MODE_PRIVATE)
+
+        // اگه قبلاً رمز درست وارد شده، دیگه نمایش نده
+        if (prefs.getBoolean("password_ok", false)) {
+            addDefaultConfigs()
+            return
+        }
+
+        val input = EditText(this).apply {
+            hint = "رمز عبور را وارد کنید"
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(50, 30, 50, 10)
+            addView(input)
+        }
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("PARSAVIP")
+            .setMessage("برای ورود، رمز عبور را وارد کنید")
+            .setView(container)
+            .setCancelable(false)
+            .setPositiveButton("ورود") { _, _ ->
+                val entered = input.text.toString().trim()
+                if (entered == "poiiu") {
+                    prefs.edit().putBoolean("password_ok", true).apply()
+                    Toast.makeText(this, "✅ خوش آمدید", Toast.LENGTH_SHORT).show()
+                    addDefaultConfigs()
+                } else {
+                    Toast.makeText(this, "❌ رمز اشتباه است", Toast.LENGTH_LONG).show()
+                    showPasswordDialog()
+                }
+            }
+            .setNegativeButton("خروج") { _, _ ->
+                finish()
+            }
+            .create()
+
+        dialog.show()
+    }
+
+    // ⬇️ تابع اضافه کردن کانفیگ‌های پیش‌فرض
     private fun addDefaultConfigs() {
         val prefs: SharedPreferences = getSharedPreferences("parsavip_prefs", MODE_PRIVATE)
         if (prefs.getBoolean("configs_added", false)) return
@@ -121,7 +171,6 @@ class MainActivity : HelperBaseComponentActivity() {
 
         myConfigs.forEach { configUrl ->
             try {
-                // اضافه کردن کانفیگ به صورت گروهی
                 mainViewModel.onAction(MainAction.ImportBatchConfig(configUrl))
             } catch (e: Exception) {
                 LogUtil.e(AppConfig.TAG, "Failed to add default config", e)
